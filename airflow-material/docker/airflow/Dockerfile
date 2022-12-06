@@ -3,8 +3,7 @@ FROM python:3.7-slim-buster
 LABEL maintainer="Tarcio Lima"
 
 # Arguments that can be set with docker build
-# Estava 2.4.2 constraint 3.7
-ARG AIRFLOW_VERSION=2.2.5 
+ARG AIRFLOW_VERSION=2.2.5
 ARG AIRFLOW_HOME=/opt/airflow
 
 # Export the environment variable AIRFLOW_HOME where airflow will be installed
@@ -41,12 +40,7 @@ RUN apt-get update -y && \
 # Install apache airflow with subpackages
 RUN pip install --upgrade "pip==22.3.1" && \
     useradd -ms /bin/bash -d ${AIRFLOW_HOME} airflow && \
-    pip install apache-airflow==${AIRFLOW_VERSION} --constraint https://raw.githubusercontent.com/apache/airflow/constraints-2.2.5/constraints-3.7.txt
-    # pip install apache-airflow-providers-apache-hdfs==2.1.0 && \
-    # pip install apache-airflow-providers-apache-hive==2.0.2 && \
-    # pip install apache-airflow-providers-apache-spark==2.0.1 && \
-    # pip install apache-airflow-providers-slack==4.0.1 && \
-    # pip install apache-airflow-providers-http==2.0.1
+    pip install apache-airflow==2.2.5 --constraint https://raw.githubusercontent.com/apache/airflow/constraints-2.2.5/constraints-no-providers-3.7.txt
 
 # Copy the airflow.cfg file (config)
 #COPY ./config/airflow.cfg ${AIRFLOW_HOME}/airflow.cfg
